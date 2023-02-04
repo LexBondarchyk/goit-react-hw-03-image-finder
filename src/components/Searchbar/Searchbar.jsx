@@ -1,31 +1,34 @@
-import {Component} from "react";
-import styles from './search-bar.module.scss'
+import { Component } from 'react';
+import styles from './search-bar.module.scss';
 class Searchbar extends Component {
   state = {
-    search:'',
-  }
-  handleChange = ({target}) =>{
-    const {name, value} = target;
-    this.setState ({[name]: value});
+    search: '',
   };
-  handleSubmit = e =>{
-    e.preventDefault()
-    const {onSubmit} = this.props
-    onSubmit(this.state.search)
-  }
-  reset(){
+  handleChange = ({ target }) => {
+    const { name, value } = target;
+    this.setState({ [name]: value });
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    if (this.state.search.trim() !== '') {
+      return alert('Somthing goes wrong.');
+    }
+    const { onSubmit } = this.props;
+    onSubmit(this.state.search);
+  };
+  reset() {
     this.setState({
-      search:'',
-    })
+      search: '',
+    });
   }
   render() {
     const { search } = this.state;
     const { handleChange, handleSubmit } = this;
-    return(
+    return (
       <form className={styles.Searchbar} onSubmit={handleSubmit}>
         <div className={styles.SearchForm}>
           <button type="submit" className={styles.SearchFormButton}>
-          <span className={styles.SearchFormButtonLabel}>Search</span>
+            <span className={styles.SearchFormButtonLabel}>Search</span>
           </button>
 
           <input
@@ -38,9 +41,7 @@ class Searchbar extends Component {
           />
         </div>
       </form>
-    )
+    );
   }
 }
-export default Searchbar
-
-    
+export default Searchbar;
