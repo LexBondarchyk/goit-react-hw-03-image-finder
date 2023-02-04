@@ -1,16 +1,21 @@
+import PropTypes from "prop-types";
 import { Component } from 'react';
 import styles from './search-bar.module.scss';
 class Searchbar extends Component {
   state = {
     search: '',
   };
+static propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+}
+
   handleChange = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
   };
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.search.trim() !== '') {
+    if (this.state.search.trim() === '') {
       return alert('Somthing goes wrong.');
     }
     const { onSubmit } = this.props;

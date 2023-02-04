@@ -35,5 +35,6 @@ ImageGallery.propTypes = {
     })
   ).isRequired,
   handleShowModal: PropTypes.func,
+  error:PropTypes.string,
 };
 
